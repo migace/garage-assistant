@@ -1,0 +1,50 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "name": "Tomasz",
+      "surname": "Augustyn",
+      "regular": false
+    },
+    {
+      "id": 2,
+      "name": "Tomasz",
+      "surname": "Nowak",
+      "regular": false
+    },
+    {
+      "id": 3,
+      "name": "Jan",
+      "surname": "Kowalski",
+      "regular": false
+    },
+    {
+      "id": 4,
+      "name": "Tomasz",
+      "surname": "Niewiadomski",
+      "regular": true
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "startDate": "2018-04-20",
+      "endDate": "2018-04-25",
+      "car": "Volkswagen Passat",
+      "client": "Tomasz Augustyn",
+      "desc": "The engine has been replaced.",
+      "completed": false,
+      "comments": ""
+    },
+    {
+      "id": 2,
+      "startDate": "2018-05-06",
+      "endDate": "2018-05-09",
+      "car": "Audi A6",
+      "client": "Tomasz Nowak",
+      "desc": "The turbo has been replaced.",
+      "completed": true,
+      "comments": ""
+    }
+  ]
+}
