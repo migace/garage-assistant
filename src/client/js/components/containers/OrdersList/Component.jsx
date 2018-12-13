@@ -1,7 +1,8 @@
 import React from 'react';
 import shortid from 'shortid';
+import moment from 'moment';
 
-const OrdersTable = ({ orders }) => (
+const Component = ({ orders }) => (
   <table className="table">
     <thead>
       <tr>
@@ -19,8 +20,8 @@ const OrdersTable = ({ orders }) => (
       {orders.map(order => (
         <tr key={shortid()}>
           <td>{ order.id }</td>
-          <td>{ order.startDate }</td>
-          <td>{ order.endDate }</td>
+          <td>{ moment(order.startDate).format("MMM Do YY") }</td>
+          <td>{ moment(order.endDate).format("MMM Do YY") }</td>
           <td>{ order.car }</td>
           <td>{ order.client }</td>
           <td>{ order.desc }</td>
@@ -36,4 +37,4 @@ const OrdersTable = ({ orders }) => (
   </table>
 );
 
-export default OrdersTable;
+export default Component;

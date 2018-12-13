@@ -1,11 +1,11 @@
-import { GET_ALL } from '../actions/Orders';
+import { FETCH_ORDERS_SUCCESS } from '../actions/Orders';
 
 const initialState = [];
 
 const Orders = (state = initialState, action) => {
   switch(action.type) {
-    case GET_ALL:
-      return [...state, ...action.orders];
+    case FETCH_ORDERS_SUCCESS:
+      return action.orders;
     default:
       return state;
   }

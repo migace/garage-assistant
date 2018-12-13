@@ -27,40 +27,42 @@ class AddOrder extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      startDate: new Date(),
-      endDate: new Date(),
+    this.state = {      
       modalIsOpen: false,
       formControls: {
-        description: {
-          value: ''
-        },
-        comments: {
-          value: ''
-        },
-        client: {
-          value: 'Select'
-        },
-        car: {
-          value: ''
-        },
-        phone: {
-          value: ''
-        },
+        startDate: new Date(),
+        endDate: new Date(),
+        desc: '',
+        comments: '',
+        client: 'Select',
+        car: '',
+        phone: '',
       }
     };
 
-    this.changeHandlerDatepicker = this.changeHandlerDatepicker.bind(this);
+    this.startDateDatepicker = this.startDateDatepicker.bind(this);
+    this.endDateDatepicker = this.endDateDatepicker.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  changeHandlerDatepicker(date) {
+  startDateDatepicker(startDate) {
     this.setState({
-      startDate: date,
-      endDate: new Date(),
+      formControls: {
+        ...this.state.formControls,
+        startDate,
+      },
+    });
+  }
+
+  endDateDatepicker(endDate) {    
+    this.setState({
+      formControls: {
+        ...this.state.formControls,
+        endDate,
+      },
     });
   }
 
@@ -71,15 +73,15 @@ class AddOrder extends Component {
     this.setState({
       formControls: {
         ...this.state.formControls,
-        [name]: {
-          value
-        }
-      }
+        [name]: value,
+      },
     }); 
   }
 
   submitHandler(event) {
     event.preventDefault();
+
+    this.props.addOrder({ ...this.state.formControls, completed: false });
   }
 
   openModal() {
@@ -120,7 +122,7 @@ class AddOrder extends Component {
           <div className="field-body">
             <div className="field has-addons">
               <p className="control select">
-                <select name="client" onChange={this.changeHandler} value={this.state.formControls.client.value}>
+                <select name="client" onChange={this.changeHandler} value={this.state.formControls.client}>
                   <option value="Select">Select</option>
                   {this.props.clients.map(client => {
                     const clientRecord = `${client.name} ${client.surname}`;
@@ -162,8 +164,9 @@ class AddOrder extends Component {
             <DatePicker
               className="input"
               popperClassName={styles.datepicker}
-              selected={this.state.startDate}
-              onChange={this.changeHandlerDatepicker}
+              selected={this.state.formControls.startDate}
+              onChange={this.startDateDatepicker}
+              onSelect={this.startDateDatepicker}
             />
           </div>
         </div>
@@ -176,8 +179,9 @@ class AddOrder extends Component {
             <DatePicker
               className="input"
               popperClassName={styles.datepicker}
-              selected={this.state.endDate}
-              onChange={this.changeHandlerDatepicker}
+              selected={this.state.formControls.endDate}
+              onChange={this.endDateDatepicker}
+              onSelect={this.endDateDatepicker}
             />
           </div>
         </div>
@@ -192,7 +196,7 @@ class AddOrder extends Component {
                 <textarea 
                   className="textarea" 
                   placeholder="Explain how we can help you"
-                  name="description" 
+                  name="desc" 
                   onChange={this.changeHandler} 
                 >
                 </textarea>
