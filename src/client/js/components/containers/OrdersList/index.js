@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchOrders } from '../../../actions/Orders';
+import { withRouter } from 'react-router';
+import { fetchOrders, removeOrder } from '../../../actions/Orders';
 import Component from './Component';
 
 class OrdersList extends React.Component {
@@ -23,6 +24,10 @@ const mapStateToProps = ({ orders }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchOrders: () => dispatch(fetchOrders()),
+  removeAction: (e, orderId) => {
+    e.preventDefault();
+    dispatch(removeOrder(orderId));
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrdersList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrdersList));

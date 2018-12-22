@@ -2,7 +2,7 @@ import React from 'react';
 import shortid from 'shortid';
 import moment from 'moment';
 
-const Component = ({ orders }) => (
+const Component = ({ orders, removeAction }) => (
   <table className="table">
     <thead>
       <tr>
@@ -14,6 +14,7 @@ const Component = ({ orders }) => (
         <th>Description</th>
         <th>Comments</th>
         <th>Completed</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +31,9 @@ const Component = ({ orders }) => (
             <span className="icon">
               <i className={"fas " + (order.completed ? 'fa-check' : 'fa-times')}></i>
             </span>
+          </td>
+          <td>
+            <a className="button is-danger" onClick={(e) => removeAction(e, order.id)}>Remove</a>
           </td>
         </tr>
       ))}

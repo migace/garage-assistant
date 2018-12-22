@@ -29,7 +29,15 @@ class Orders {
         body: JSON.stringify(data),
       }).then(data => resolve(data));
     });    
-  }  
+  }
+
+  removeOrder(orderId) {
+    return new Promise((resolve, reject) => {
+      fetch(`${API_BASE_URL}/orders/${orderId}`, {
+        method: 'DELETE',
+      }).then(() => resolve(orderId));
+    });
+  }
 }
 
 export default Orders;
