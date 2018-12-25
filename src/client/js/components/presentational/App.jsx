@@ -11,9 +11,9 @@ import Menu from './Menu';
 const App = () => (
   <Fragment>
     <Navbar />
-    <div className="container">
-      <Menu />
-      <div className="columns is-multiline is-centered">
+    <div className="container">      
+      <Menu />      
+      <div className="columns is-multiline is-centered">        
         <Switch>
           <Route exact path="/add-order" render={ () => <AddOrder className="column is-8 is-offset-2" /> } />
           <Route exact path="/add-client" render={ () => <AddClient className="column is-8 is-offset-2" /> } />          
