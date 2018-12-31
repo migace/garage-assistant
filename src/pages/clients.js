@@ -1,9 +1,9 @@
 import React from 'react';
-import OrdersList from '../components/containers/OrdersList';
+import ClientsList from '../components/containers/ClientsList';
 import Page from '../layouts';
 
 export default () => (
   <Page>
-    <OrdersList />
+    <ClientsList />
   </Page>
 );

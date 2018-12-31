@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { fetchOrders, removeOrder } from '../../../actions/Orders';
 import Component from './Component';
 
@@ -30,4 +29,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrdersList));
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersList);

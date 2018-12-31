@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Menu = () => (
   <section className="section">
@@ -15,7 +15,7 @@ const Menu = () => (
               <span>Orders List</span>
             </a>
           </Link>
-          <Link href="/clients-list">
+          <Link href="/clients">
             <a className="button is-link is-medium">
               <span className="icon is-small">
                 <FontAwesomeIcon icon="equals" />
