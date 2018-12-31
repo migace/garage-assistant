@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import shortid from 'shortid';
 import AddClient from '../AddClient';
 import { APP_ELEMENT } from '../../../constants';
-import styles from './style.scss';
+import styles from './style.css';
 
 const customStyles = {
   content: {
