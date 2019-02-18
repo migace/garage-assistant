@@ -7,6 +7,8 @@ Technical stack: React + Redux + Redux Thunk + Bulma
 You should remember to change a database filename in `db.json.sample` to `db.json`.
 
 ```javascript
-npm i
-npm start
+yarn install
+yarn start
 ```
+
+Next your site will be here: `http://localhost:3000`
