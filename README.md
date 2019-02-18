@@ -4,7 +4,7 @@ Technical stack: React + Redux + Redux Thunk + Bulma
 
 ## How to run developer mode
 
-You should remember to change a database filename in `/src/server/db.json.sample` to `/src/server/db.json`.
+You should remember to change a database filename in `db.json.sample` to `db.json`.
 
 ```javascript
 npm i
