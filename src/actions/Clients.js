@@ -1,12 +1,28 @@
-import { API_BASE_URL } from '../constants';
+import ClientsService from '../services/Clients';
 
-export const GET_ALL = 'GET_ALL_CLIENTS';
+export const FETCH_CLIENTS_SUCCESS = 'FETCH_CLIENTS_SUCCESS';
+export const ADD_CLIENT = 'ADD_CLIENT';
 
-export const getAll = (clients) => ({
-  type: GET_ALL,
-  clients
+export const clientsFetched = clients => ({
+  type: FETCH_CLIENTS_SUCCESS,
+  clients,
 });
 
-export const addClientRequest = (data) => {
-  
-}
+export const clientAdded = client => ({
+  type: ADD_CLIENT,
+  client,
+});
+
+export const fetchClients = () => async dispatch => {
+  const clientsService = new ClientsService();
+  const response = await clientsService.getAll();
+
+  dispatch(clientsFetched(response));
+};
+
+export const addClient = (data) => async dispatch => {
+  const clientsService = new ClientsService();
+  const clientData = await clientsService.addClient(data);
+
+  dispatch(clientAdded(clientData));
+};

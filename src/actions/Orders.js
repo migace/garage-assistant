@@ -1,4 +1,3 @@
-import { push } from 'connected-react-router'
 import OrdersService from '../services/Orders';
 
 export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
@@ -20,22 +19,23 @@ export const orderRemoved = orderId => ({
   orderId,
 });
 
-export const fetchOrders = () => dispatch => {
+export const fetchOrders = () => async dispatch => {
   const ordersService = new OrdersService();
-  ordersService.getAll().then(data => dispatch(ordersFetched(data)));
+  const orders = await ordersService.getAll();
+
+  dispatch(ordersFetched(orders));
 };
 
-export const addOrder = (data) => dispatch => {
+export const addOrder = (data) => async dispatch => {
   const ordersService = new OrdersService();
-  ordersService.addOrder(data).then(data => {
-    dispatch(orderAdded(data));
-    dispatch(push('/'));
-  });
+  const order = await ordersService.addOrder(data);
+
+  dispatch(orderAdded(order));
 };
 
-export const removeOrder = (orderId) => dispatch => {
+export const removeOrder = (orderId) => async dispatch => {
   const ordersService = new OrdersService();
-  ordersService.removeOrder(orderId).then(() => {
-    dispatch(orderRemoved(orderId));
-  });
+  await ordersService.removeOrder(orderId);
+
+  dispatch(orderRemoved(orderId));
 };

@@ -1,11 +1,13 @@
-import { GET_ALL } from '../actions/Clients';
+import { FETCH_CLIENTS_SUCCESS, ADD_CLIENT } from '../actions/Clients';
 
 const initialState = [];
 
 const Clients = (state = initialState, action) => {
   switch(action.type) {
-    case GET_ALL:
+    case FETCH_CLIENTS_SUCCESS:
       return [...state, ...action.clients];
+    case ADD_CLIENT:
+      return [...state, action.client];
     default:
       return state;
   }
