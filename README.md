@@ -12,3 +12,5 @@ yarn start
 ```
 
 Next your site will be here: `http://localhost:3000`
+
+![Garage-Assistant app](http://serwer1843592.home.pl/static/images/github/garage-assistant.png)
