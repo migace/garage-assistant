@@ -38,6 +38,7 @@
     "shortid": "^2.2.14"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
     "moment": "^2.22.2",
     "next-compose-plugins": "^2.1.1",
     "react-breadcrumbs": "^2.1.6",
