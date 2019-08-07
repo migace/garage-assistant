@@ -1,14 +1,14 @@
 import App, { Container } from 'next/app';
 import React from 'react';
 import { Provider } from 'react-redux';
-import withReduxStore from '../middlewares/withReduxStore';
-import 'react-datepicker/dist/react-datepicker.css';
-import 'bulma/css/bulma.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEquals, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bulma/css/bulma.min.css';
+
+import withReduxStore from '../middlewares/withReduxStore';
 
 library.add(faEquals);
 library.add(faPlus);

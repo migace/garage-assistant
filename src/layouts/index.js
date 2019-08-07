@@ -4,18 +4,20 @@ import Footer from '../components/presentational/Footer';
 import Navbar from '../components/presentational/Navbar';
 import Menu from '../components/presentational/Menu';
 
+import './style.css';
+
 export default ({ children }) => (
-  <div>
+  <>
     <Meta />
     <Navbar />
-    <div className="container">      
+    <div id="wrapper" className="container">      
       <Menu />      
       <div className="columns is-multiline is-centered">                
         <div className="column">
             { children }
         </div>
       </div>
-    </div>       
+    </div>
     <Footer />
-  </div>
+  </>
 );

@@ -3,7 +3,7 @@ import shortid from 'shortid';
 
 class ClientsList extends Component {
   async componentDidMount() {
-    const response = await this.props.fetchClients();
+    await this.props.fetchClients();
   }
 
   render() {
