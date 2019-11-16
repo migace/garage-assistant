@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import shortid from 'shortid';
 
 class ClientsList extends Component {
   async componentDidMount() {
@@ -21,10 +20,10 @@ class ClientsList extends Component {
         </thead>
         <tbody>
           {clients.map(client => (
-            <tr key={shortid()}>
-              <td>{ client.id }</td>
-              <td>{ client.name }</td>
-              <td>{ client.surname }</td>
+            <tr key={client.id}>
+              <td>{client.id}</td>
+              <td>{client.name}</td>
+              <td>{client.surname}</td>
               <td>
                 <span className="icon">
                   <i className={"fas " + (client.regular ? 'fa-check' : 'fa-times')}></i>

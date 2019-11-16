@@ -1,5 +1,4 @@
 import React from 'react';
-import shortid from 'shortid';
 import moment from 'moment';
 
 const Component = ({ orders, removeAction }) => (
@@ -19,14 +18,14 @@ const Component = ({ orders, removeAction }) => (
     </thead>
     <tbody>
       {orders.map(order => (
-        <tr key={shortid()}>
-          <td>{ order.id }</td>
-          <td>{ moment(order.startDate).format("MMM Do YY") }</td>
-          <td>{ moment(order.endDate).format("MMM Do YY") }</td>
-          <td>{ order.car }</td>
-          <td>{ order.client }</td>
-          <td>{ order.desc }</td>
-          <td>{ order.comments }</td>
+        <tr key={order.id}>
+          <td>{order.id}</td>
+          <td>{moment(order.startDate).format("MMM Do YY")}</td>
+          <td>{moment(order.endDate).format("MMM Do YY")}</td>
+          <td>{order.car}</td>
+          <td>{order.client}</td>
+          <td>{order.desc}</td>
+          <td>{order.comments}</td>
           <td>
             <span className="icon">
               <i className={"fas " + (order.completed ? 'fa-check' : 'fa-times')}></i>

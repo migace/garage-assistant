@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import Modal from 'react-modal';
-import shortid from 'shortid';
 import AddClient from '../AddClient';
 import { APP_ELEMENT } from '../../../constants';
 import styles from './style.css';
