@@ -1,4 +1,5 @@
-import App, { Container } from 'next/app';
+import App from 'next/app';
+import Head from 'next/head'
 import React from 'react';
 import { Provider } from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -18,11 +19,14 @@ class MyApp extends App {
     const { Component, pageProps, reduxStore } = this.props;
 
     return (
-      <Container>
+      <>
+        <Head>
+          <title>Garage-Assistant App</title>
+        </Head>      
         <Provider store={reduxStore}>
           <Component {...pageProps} />
         </Provider>
-      </Container>
+      </>
     )
   }
 }

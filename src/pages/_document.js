@@ -17,8 +17,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html>
-        <Head>
-          <title>Garage-Assistant App</title>
+        <Head>          
           {this.props.styleTags}
         </Head>
         <body>

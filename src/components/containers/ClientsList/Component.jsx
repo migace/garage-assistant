@@ -9,7 +9,7 @@ class ClientsList extends Component {
     const { clients } = this.props;
 
     return (
-      <table className="table">
+      <table className="table is-fullwidth">
         <thead>
           <tr>
             <th>ID</th>
