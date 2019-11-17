@@ -12,7 +12,7 @@ class Orders {
   }
 
   async getAll() {
-    const response = await fetch(`${API_BASE_URL}/orders`);
+    const response = await fetch(`${API_BASE_URL}/orders?_expand=client`);
 
     return response.json();
   }

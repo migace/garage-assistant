@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchOrders, removeOrder } from '../../../actions/Orders';
-import Component from './Component';
+import Component from './OrdersList';
 
 class OrdersList extends React.Component {
   constructor(props) {

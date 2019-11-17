@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Component from './Component';
+import Component from './AddOrder';
 import { addOrder } from '../../../actions/Orders';
 
 const mapStateToProps = (({ clients }) => ({
