@@ -14,4 +14,4 @@ npm start
 Next your site will be here: `http://localhost:3000`
 
 ### How it looks
-![Garage-Assistant app](http://serwer1843592.home.pl/static/images/github/garage-assistant.png)
+![Garage-Assistant app](http://serwer1843592.home.pl/static/images/github/garage-assistant-list.png)
