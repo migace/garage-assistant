@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 
-const Menu = () => (
+export const Menu = () => (
   <div className="level">
     <div className="level-left">
       <div className="buttons">
@@ -46,5 +46,3 @@ const Menu = () => (
     </div>
   </div>
 );
-
-export default Menu;

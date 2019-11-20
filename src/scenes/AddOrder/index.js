@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import Component from './AddClient';
-import { addClient } from '../../../actions/Clients';
+import Component from './AddOrder';
+import { addOrder } from '../../actions/Orders';
 
 const mapStateToProps = (({ clients }) => ({
   clients,
 }));
 
 const mapDispatchToProps = dispatch => ({
-  addClient: (data) => dispatch(addClient(data)),
+  addOrder: (data) => dispatch(addOrder(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import Modal from 'react-modal';
 import AddClient from '../AddClient';
-import { APP_ELEMENT } from '../../../constants';
+import { APP_ELEMENT } from '../../constants';
 import styles from './style.css';
 
 const customStyles = {

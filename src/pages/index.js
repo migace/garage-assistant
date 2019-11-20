@@ -1,5 +1,5 @@
 import React from 'react';
-import OrdersList from '../components/containers/OrdersList';
+import OrdersList from '../scenes/OrdersList';
 import Page from '../layouts';
 
 export default () => (

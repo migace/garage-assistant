@@ -1,4 +1,4 @@
-import { SHORT_CAR_DESCRIPTION_LENGTH } from '../../../constants';
+import { SHORT_CAR_DESCRIPTION_LENGTH } from '../../constants';
 
 export const getCar = (car) => `${car.make} ${car.model} (${car.year})`;
 export const getDescription = (description) => (

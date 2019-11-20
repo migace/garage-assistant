@@ -1,5 +1,5 @@
 import React from 'react';
-import ClientsList from '../components/containers/ClientsList';
+import ClientsList from '../scenes/ClientsList';
 import Page from '../layouts';
 
 export default () => (

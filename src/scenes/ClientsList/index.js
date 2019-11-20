@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Component from './ClientList';
-import { fetchClients } from '../../../actions/Clients';
+import { fetchClients } from '../../actions/Clients';
 
 const mapStateToProps = ({ clients }) => ({
   clients,

@@ -9,7 +9,7 @@ import {
   getDescription
 } from './utils';
 
-const Component = ({ orders, removeAction }) => (
+export const OrdersList = ({ orders, removeAction }) => (
   <Table className="table is-hoverable is-fullwidth">
     <thead>
       <tr>
@@ -49,5 +49,3 @@ const Component = ({ orders, removeAction }) => (
     </tbody>
   </Table>
 );
-
-export default Component;

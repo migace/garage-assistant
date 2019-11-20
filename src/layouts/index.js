@@ -1,8 +1,8 @@
 import React from 'react';
-import Meta from '../components/presentational/Head';
-import Footer from '../components/presentational/Footer';
-import { Navbar } from '../components/presentational/Navbar';
-import Menu from '../components/presentational/Menu';
+import { Meta } from '../components/Meta';
+import { Footer } from '../components/Footer';
+import { Navbar } from '../components/Navbar';
+import { Menu } from '../components/Menu';
 
 import './style.css';
 

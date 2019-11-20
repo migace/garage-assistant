@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchOrders, removeOrder } from '../../../actions/Orders';
-import Component from './OrdersList';
+import { fetchOrders, removeOrder } from '../../actions/Orders';
+import { OrdersList } from './OrdersList';
 
-class OrdersList extends React.Component {
+class OrdersListWrapper extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,7 +13,7 @@ class OrdersList extends React.Component {
   }
 
   render() {
-    return <Component { ...this.props } />;
+    return <OrdersList { ...this.props } />;
   }
 }
 
@@ -29,4 +29,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrdersList);
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersListWrapper);
