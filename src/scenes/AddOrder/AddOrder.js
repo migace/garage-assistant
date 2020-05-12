@@ -1,258 +1,259 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import DatePicker from 'react-datepicker';
-import Modal from 'react-modal';
-import AddClient from '../AddClient';
-import { APP_ELEMENT } from '../../constants';
-import styles from './style.css';
+import range from "lodash/range";
+import moment from "moment";
+import React, { useState } from "react";
+import Button from '@material-ui/core/Button';
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import DateFnsUtils from "@date-io/moment";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import clsx from "clsx";
+import useSWR from "swr";
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  overlay: {
-    zIndex: '100',
-  }
-};
+import { ClientService } from "services/ClientService";
+import { CarService } from "services/CarService";
 
-Modal.setAppElement(APP_ELEMENT);
+import { useStyles } from "./AddOrder.styles";
 
-class AddOrder extends Component {
-  constructor(props) {
-    super(props);
+const clientService = new ClientService();
+const carService = new CarService();
 
-    this.state = {      
-      modalIsOpen: false,
-      formControls: {
-        startDate: new Date(),
-        endDate: new Date(),
-        desc: '',
-        comments: '',
-        client: 'Select',
-        car: '',
-        phone: '',
-      }
-    };
+export const AddOrder = () => {
+  const { data: { clients } = {}, error } = useSWR(
+    "/api/clients",
+    clientService.getAll
+  );
+  const { data: { cars } = {} } = useSWR("/api/cars", carService.getAll);
+  const classes = useStyles();
+  const [clientId, setClientId] = useState("");
+  const [carManufacturer, setCarManufacturer] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [carYear, setCarYear] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(moment());
+  const [description, setDescription] = useState("");
 
-    this.startDateDatepicker = this.startDateDatepicker.bind(this);
-    this.endDateDatepicker = this.endDateDatepicker.bind(this);
-    this.changeHandler = this.changeHandler.bind(this);
-    this.submitHandler = this.submitHandler.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
+  const disabledCarModelField = !carManufacturer;
 
-  startDateDatepicker(startDate) {
-    this.setState({
-      formControls: {
-        ...this.state.formControls,
-        startDate,
-      },
-    });
-  }
+  const handleCarManufacturerChange = ({ target: { value } }) =>
+    setCarManufacturer(value);
+  const handleCarModelChange = ({ target: { value } }) => setCarModel(value);
+  const handleCarYearChange = ({ target: { value } }) => setCarYear(value);
+  const handleClientIdChange = ({ target: { value } }) => setClientId(value);
+  const handleDescriptionChange = ({ target: { value } }) =>
+    setDescription(value);
+  const handleStartDateChange = (date) => setStartDate(date);
+  const handleEndDateChange = (date) => setEndDate(date);
 
-  endDateDatepicker(endDate) {    
-    this.setState({
-      formControls: {
-        ...this.state.formControls,
-        endDate,
-      },
-    });
-  }
-
-  changeHandler(event) {   
-    const name = event.target.name;
-    const value = event.target.value;
-
-    this.setState({
-      formControls: {
-        ...this.state.formControls,
-        [name]: value,
-      },
-    }); 
-  }
-
-  submitHandler(event) {
-    event.preventDefault();
-
-    this.props.addOrder({ ...this.state.formControls, completed: false });
-    location.href = '/';
-  }
-
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // ---
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  render() {
-    return (
-      <form className={this.props.className} onSubmit={this.submitHandler}>
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">Car</label>
-          </div>
-          <div className="field-body">
-            <div className="field">
-              <p className="control is-expanded has-icons-left">
-                <input className="input" placeholder="Toyota Prius" name="car" onChange={this.changeHandler} />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-user"></i>
-                </span>
-              </p>
-            </div>            
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">Client</label>
-          </div>
-          <div className="field-body">
-            <div className="field has-addons">
-              <p className="control select">
-                <select name="client" onChange={this.changeHandler} value={this.state.formControls.client}>
-                  <option value="Select">Select</option>
-                  {this.props.clients.map(client => {
-                    const clientRecord = `${client.name} ${client.surname}`;
-
-                    return <option key={clientRecord} value={clientRecord}>{clientRecord}</option>
-                  })}
-                </select>
-              </p>
-              <p className="control">
-                <a className="button is-link" onClick={this.openModal}>
-                  <span className="icon">
-                    <i className="far fa-address-card"></i>
-                  </span>
-                  <span>Add a new client</span>
-                </a>
-              </p>
-            </div>
-            <div className="field is-expanded">
-              <div className="field has-addons">
-                <p className="control">
-                  <a className="button is-static">
-                    +48
-                  </a>
-                </p>
-                <p className="control is-expanded">
-                  <input className="input" type="tel" placeholder="Contact phone number" name="phone" onChange={this.changeHandler}  />
-                </p>
-              </div>
-              <p className="help">Do not enter the first zero</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">Start date</label>
-          </div>
-          <div className="field-body">
-            <DatePicker
-              className="input"
-              popperClassName={styles.datepicker}
-              selected={this.state.formControls.startDate}
-              onChange={this.startDateDatepicker}
-              onSelect={this.startDateDatepicker}
-            />
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">End date</label>
-          </div>
-          <div className="field-body">
-            <DatePicker
-              className="input"
-              popperClassName={styles.datepicker}
-              selected={this.state.formControls.endDate}
-              onChange={this.endDateDatepicker}
-              onSelect={this.endDateDatepicker}
-            />
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">Description</label>
-          </div>
-          <div className="field-body">
-            <div className="field">
-              <div className="control">
-                <textarea 
-                  className="textarea" 
-                  placeholder="Explain how we can help you"
-                  name="desc" 
-                  onChange={this.changeHandler} 
-                >
-                </textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">Comments</label>
-          </div>
-          <div className="field-body">
-            <div className="field">
-              <div className="control">
-                <textarea 
-                  className="textarea" 
-                  placeholder="Explain how we can help you"
-                  name="comments" 
-                  onChange={this.changeHandler} 
-                >
-                </textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label"></div>
-          <div className="field-body">
-            <div className="field">
-              <div className="control">
-                <button className="button is-success">
-                  Add 
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          contentLabel="Add Client"
-          style={customStyles}
+  return (
+    <Paper className={classes.root}>
+      <form noValidate autoComplete="off">
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={1}
         >
-          <AddClient />
-        </Modal>
+          <Grid container spacing={4}>
+            <Grid item sm={4}>
+              <FormControl
+                className={clsx(classes.formControl, classes.selectWrapper)}
+                fullWidth
+              >
+                <InputLabel id="demo-simple-select-label" shrink>
+                  Car manufacturer
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={carManufacturer}
+                  onChange={handleCarManufacturerChange}
+                >
+                  {cars &&
+                    Object.keys(cars).map((car) => (
+                      <MenuItem key={car} value={car}>
+                        {car}
+                      </MenuItem>
+                    ))}
+                </Select>
+                {!cars && (
+                  <CircularProgress
+                    size={24}
+                    className={classes.selectProgress}
+                  />
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item sm={4}>
+              <FormControl className={classes.selectWrapper} fullWidth>
+                <InputLabel
+                  id="demo-simple-select-label"
+                  shrink
+                  disabled={disabledCarModelField}
+                >
+                  Car model
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={carModel}
+                  onChange={handleCarModelChange}
+                  disabled={disabledCarModelField}
+                >
+                  {carManufacturer &&
+                    cars[carManufacturer].map((model) => (
+                      <MenuItem key={model} value={model}>
+                        {model}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item sm={4}>
+              <FormControl className={classes.selectWrapper} fullWidth>
+                <InputLabel id="demo-simple-select-label" shrink>
+                  Car's production date
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={carYear}
+                  onChange={handleCarYearChange}
+                >
+                  {range(moment().year(), moment().year() - 31).map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid container spacing={4}>
+            <Grid item sm={4}>
+              <FormControl
+                className={clsx(classes.formControl, classes.selectWrapper)}
+                fullWidth
+              >
+                <InputLabel id="demo-simple-select-label">Client</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={clientId}
+                  onChange={handleClientIdChange}
+                >
+                  {clients &&
+                    clients.map((client) => (
+                      <MenuItem key={client.id} value={client.id}>
+                        {client.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+                {!clients && (
+                  <CircularProgress
+                    size={24}
+                    className={classes.selectProgress}
+                  />
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item sm={4}>
+              <TextField
+                id="standard-helperText"
+                label="Phone"
+                defaultValue=""
+                helperText="Do not enter the first zero"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">+48</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={4}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid item sm={4}>
+                <FormControl
+                  className={clsx(classes.formControl, classes.selectWrapper)}
+                  fullWidth
+                >
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="DD/MM/YYYY"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Start date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                    disablePast
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item sm={4}>
+                <FormControl
+                  className={clsx(classes.formControl, classes.selectWrapper)}
+                  fullWidth
+                >
+                  <KeyboardDatePicker
+                    disableToolbar
+                    disablePast
+                    variant="inline"
+                    format="DD/MM/YYYY"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="End date"
+                    value={endDate}
+                    onChange={handleEndDateChange}                    
+                    minDate={startDate}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+            </MuiPickersUtilsProvider>
+          </Grid>
+          <Grid container spacing={4}>
+            <Grid item sm={12}>
+              <FormControl
+                className={clsx(classes.formControl, classes.selectWrapper)}
+                fullWidth
+              >
+                <TextField
+                  id="standard-multiline-flexible"
+                  label="Description"
+                  multiline
+                  rowsMax={4}
+                  value={description}
+                  onChange={handleDescriptionChange}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid container spacing={4} justify="flex-end">
+            <Grid item>
+              <Button variant="contained" color="primary">
+                Add
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </form>
-    );
-  }
-}
-
-AddOrder.propTypes = {
-  className: PropTypes.string,
+    </Paper>
+  );
 };
-
-export default AddOrder;

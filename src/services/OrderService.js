@@ -1,8 +1,8 @@
-import { API_BASE_URL } from '../constants';
+import { API_BASE_URL } from "../constants";
 
 let instance = null;
 
-class Orders {
+export class OrderService {
   constructor() {
     if (!instance) {
       instance = this;
@@ -12,30 +12,28 @@ class Orders {
   }
 
   async getAll() {
-    const response = await fetch(`${API_BASE_URL}/orders?_expand=client`);
+    const response = await fetch(`${API_BASE_URL}/orders`);
 
     return response.json();
   }
 
   async addOrder(data) {
     const response = await fetch(`${API_BASE_URL}/orders`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    
-    return response.json();
+
+    return response.json().then((data) => data);
   }
 
   async removeOrder(orderId) {
     const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
-      method: 'DELETE',
+      method: "DELETE",
     });
 
     return response.json();
   }
 }
-
-export default Orders;

@@ -1,11 +1,11 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-import Page from '../layouts';
 
-const DynamicAddClient = dynamic(import('../scenes/AddClient'), { ssr: false });
+import { AddClient } from "scenes/AddClient";
+
+import Page from '../layouts';
 
 export default () => (
   <Page>
-    <DynamicAddClient />
+    <AddClient />
   </Page>
 );

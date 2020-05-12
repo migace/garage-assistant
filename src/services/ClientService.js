@@ -2,7 +2,7 @@ import { API_BASE_URL } from '../constants';
 
 let instance = null;
 
-class Clients {
+export class ClientService {
   constructor() {
     if (!instance) {
       instance = this;
@@ -29,5 +29,3 @@ class Clients {
     return response.json();
   }
 }
-
-export default Clients;

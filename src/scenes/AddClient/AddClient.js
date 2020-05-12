@@ -1,78 +1,60 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
 
-class AddClient extends Component {
-  constructor(props) {
-    super(props);
+import { useStyles } from "./AddClient.styles";
 
-    this.state = {           
-      formControls: {
-        name: '',
-        surname: '',
-      }
-    };
-  }
+export const AddClient = () => {
+  const classes = useStyles();
 
-  changeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    this.setState({
-      formControls: {
-        ...this.state.formControls,
-        [name]: value,
-      },
-    }); 
-  }
-
-  submitHandler = (event) => {
-    event.preventDefault();
-
-    this.props.addClient({ ...this.state.formControls, regular: false });
-    location.href = '/clients';
-  }
-
-  render() {
-    return (
-      <form className={this.props.className} onSubmit={this.submitHandler}>
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
-            <label className="label">Client</label>
-          </div>
-          <div className="field-body">
-            <div className="field">
-              <p className="control is-expanded has-icons-left">
-                <input className="input" name="name" placeholder="Name" onChange={this.changeHandler} />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-user"></i>
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control is-expanded has-icons-left">
-                <input className="input" name="surname" placeholder="Surname" onChange={this.changeHandler} />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-user"></i>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="field is-horizontal">
-          <div className="field-label"></div>
-          <div className="field-body">
-            <div className="field">
-              <div className="control">
-                <button className="button is-success">
-                  Add
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+  return (
+    <Paper className={classes.root}>
+      <form noValidate autoComplete="off">
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={1}
+        >
+          <Grid container spacing={4}>
+            <Grid item sm={6}>
+              <FormControl
+                className={classes.formControl}
+                fullWidth
+              >
+                <TextField
+                  id="standard-helperText"
+                  label="First name"
+                  defaultValue=""
+                />
+              </FormControl>
+            </Grid>
+            <Grid item sm={6}>
+              <FormControl
+                className={classes.formControl}
+                fullWidth
+              >
+                <TextField
+                  id="standard-helperText"
+                  label="Last name"
+                  defaultValue=""
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid container spacing={4} justify="flex-end">
+            <Grid item>
+              <Button variant="contained" color="primary">
+                Add
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </form>
-    );
-  }
-}
-
-export default AddClient;
+    </Paper>
+  );
+};

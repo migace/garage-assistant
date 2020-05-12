@@ -1,9 +1,11 @@
 import React from 'react';
-import OrdersList from '../scenes/OrdersList';
+
+import { OrderList } from 'scenes/OrderList';
+
 import Page from '../layouts';
 
 export default () => (
   <Page>
-    <OrdersList />
+    <OrderList />
   </Page>
 );

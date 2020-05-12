@@ -1,11 +1,11 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-import Page from '../layouts';
 
-const DynamicAddOrder = dynamic(import('../scenes/AddOrder'), { ssr: false });
+import { AddOrder } from "scenes/AddOrder";
+
+import Page from '../layouts';
 
 export default () => (
   <Page>
-    <DynamicAddOrder />
+    <AddOrder />
   </Page>
 );
