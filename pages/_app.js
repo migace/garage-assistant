@@ -3,12 +3,11 @@ import React from "react";
 
 import { mockServer } from "../server";
 
-class MyApp extends App {
-  constructor(props) {
-    super(props);
-    mockServer();
-  }
+if (process.browser) {
+  mockServer({});
+}
 
+class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;    
 

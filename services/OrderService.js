@@ -1,5 +1,3 @@
-import { API_BASE_URL } from "../constants";
-
 let instance = null;
 
 export class OrderService {
@@ -12,13 +10,13 @@ export class OrderService {
   }
 
   async getAll() {
-    const response = await fetch(`${API_BASE_URL}/orders`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/orders`);
 
     return response.json();
   }
 
   async addOrder(data) {
-    const response = await fetch(`${API_BASE_URL}/orders`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +28,7 @@ export class OrderService {
   }
 
   async removeOrder(orderId) {
-    const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/orders/${orderId}`, {
       method: "DELETE",
     });
 

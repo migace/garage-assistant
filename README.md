@@ -13,3 +13,6 @@ Next your site will be here: `http://localhost:3000`
 
 ### How it looks
 ![Garage-Assistant app](http://garage-assistant.tiptopdesign.pl/preview.png)
+
+### Demo
+[Demo](http://garage-assistant.tiptopdesign.pl)

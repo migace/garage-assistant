@@ -2,7 +2,7 @@ import random from "lodash/random";
 import { Server, Model, Factory, RestSerializer, belongsTo, hasMany, association } from "miragejs"
 import faker from "faker";
 
-export const mockServer = ({ environment = "development" } = {}) => new Server({
+export const mockServer = ({ environment = "development" }) => new Server({
   environment,
   serializers: {
     order: RestSerializer.extend({

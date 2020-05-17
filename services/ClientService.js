@@ -1,5 +1,3 @@
-import { API_BASE_URL } from '../constants';
-
 let instance = null;
 
 export class ClientService {
@@ -12,13 +10,13 @@ export class ClientService {
   }
 
   async getAll() {
-    const response = await fetch(`${API_BASE_URL}/clients`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/clients`);
 
     return response.json();
   }
 
   async addClient(data) {
-    const response = await fetch(`${API_BASE_URL}/clients`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/clients`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

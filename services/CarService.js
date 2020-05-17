@@ -1,5 +1,3 @@
-import { API_BASE_URL } from '../constants';
-
 let instance = null;
 
 export class CarService {
@@ -12,7 +10,7 @@ export class CarService {
   }
 
   async getAll() {
-    const response = await fetch(`${API_BASE_URL}/cars`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cars`);
 
     return response.json();
   }
