@@ -91,7 +91,8 @@ export const mockServer = ({ environment = "development" }) => new Server({
     });
   },
   routes() {
-    this.namespace = "api"
+    this.passthrough()
+    this.namespace = "/api"
     
     this.get('/orders');
     this.get('/clients');

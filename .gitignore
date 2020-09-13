@@ -3,3 +3,4 @@ dist/
 db.json
 .next/
 src/build/
+pems.json

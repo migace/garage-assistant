@@ -4,8 +4,10 @@ import { AddClient } from "scenes/AddClient";
 
 import Page from '../layouts';
 
-export default () => (
+const AddClientPage = () => (
   <Page>
     <AddClient />
   </Page>
 );
+
+export default AddClientPage;

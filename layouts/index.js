@@ -13,9 +13,16 @@ import Link from "@material-ui/core/Link";
 
 import { useStyles } from "./style";
 import { Menu } from './Menu';
+import {
+  useAuth,
+  useAuthFunctions,
+  getServerSideAuth,
+} from "../auth";
 
-export default ({ children }) => {
+export const Index = ({ children, initialAuth }) => {
   const classes = useStyles();
+  const auth = useAuth(initialAuth);
+  const { login, logout } = useAuthFunctions();
 
   return (
     <>
@@ -35,7 +42,11 @@ export default ({ children }) => {
             <Typography variant="h6" className={classes.title}>
               Garrage Assistant
             </Typography>
-            <Button color="inherit">Login</Button>
+            {auth ? (
+              <Button color="inherit" onClick={() => logout()}>Sign out</Button>
+            ) : (
+              <Button color="inherit" onClick={() => login()}>Sign in</Button>
+            )}
           </Toolbar>
         </AppBar>
       </div>
@@ -57,3 +68,11 @@ export default ({ children }) => {
     </>
   );
 };
+
+export const getServerSideProps = async (context) => {
+  const initialAuth = getServerSideAuth(context.req);
+
+  return { props: { initialAuth } };
+};
+
+export default Index;
