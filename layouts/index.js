@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Box from "@material-ui/core/Box";
 import Link from "@material-ui/core/Link";
+import NextLink from "next/link";
 
 import { useStyles } from "./style";
 import { Menu } from './Menu';
@@ -40,7 +41,9 @@ export const Index = ({ children, initialAuth }) => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Garrage Assistant
+              <NextLink href="/">
+                <span className={classes.link}>Garrage Assistant</span>
+              </NextLink>
             </Typography>
             {auth ? (
               <Button color="inherit" onClick={() => logout()}>Sign out</Button>
@@ -59,7 +62,7 @@ export const Index = ({ children, initialAuth }) => {
         <Box component="div" m={4}>
           <Typography align="center" variant="body2">
             &copy; {(new Date()).getFullYear()}&nbsp;
-            <Link href="www.tiptopdesign.pl">
+            <Link href="http://tiptopdesign.pl">
               tiptopdesign.pl
             </Link>
           </Typography>

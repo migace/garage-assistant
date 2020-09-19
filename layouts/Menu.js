@@ -12,7 +12,7 @@ export const Menu = () => {
   return (
     <div className={classes.root}>
       <div>
-        <Link href="/">
+        <Link href="/orders">
           <Button
             variant="contained"
             color="primary"

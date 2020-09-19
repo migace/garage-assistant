@@ -13,4 +13,7 @@ export const useStyles = makeStyles((theme) => ({
   footer: {
     paddingTop: theme.spacing(5),
   },
+  link: {
+    color: "#fff",
+  }
 }));
