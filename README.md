@@ -1,6 +1,6 @@
 # Garage Assistant
 A fictitious project involving the creation of a management panel for a car workshop.  
-Technical stack: React + Redux + Redux Thunk + Material UI
+Technical stack: React + Redux + AWS Cognito + Material UI
 
 ## How to run developer mode
 
