@@ -1,25 +1,15 @@
-import React from 'react';
+import React from "react";
+import { useSession } from "next-auth/client";
 
-import { ClientList } from 'scenes/ClientList';
-import { useAuth, getServerSideAuth  } from 'auth';
+import { ClientList } from "scenes/ClientList";
 import { Restricted } from "components/Restricted";
 
-import Page from '../layouts';
+import Page from "../layouts";
 
-const ClientsPage = ({ initialAuth }) => {
-  const auth = useAuth(initialAuth);
+const ClientsPage = () => {
+  const [session] = useSession();
 
-  return (
-    <Page>
-      {auth ? <ClientList /> : <Restricted />}
-    </Page>
-  );
-}
-
-export const getServerSideProps = async (context) => {
-  const initialAuth = getServerSideAuth(context.req);
- 
-  return { props: { initialAuth } };
+  return <Page>{session ? <ClientList /> : <Restricted />}</Page>;
 };
 
 export default ClientsPage;
