@@ -12,7 +12,7 @@ npm start
 Next your site will be here: `http://localhost:3000`
 
 ### How it looks
-![Garage-Assistant app](http://garage-assistant.tiptopdesign.pl/preview.png)
+<img width="1440" alt="Zrzut ekranu 2021-05-22 o 22 18 04" src="https://user-images.githubusercontent.com/7611776/119239784-9fa0f800-bb4b-11eb-93d3-c3da537130d2.png">
 
 ### Demo
 [Demo](http://garage-assistant.tiptopdesign.pl)
