@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "lodash": "^4.17.20",
     "moment": "^2.25.3",
-    "next-auth": "^3.23.3",
+    "next-auth": "^3.29.3",
     "next-compose-plugins": "^2.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
