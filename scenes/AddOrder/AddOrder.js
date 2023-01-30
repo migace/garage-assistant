@@ -218,7 +218,7 @@ export const AddOrder = () => {
                     id="date-picker-inline"
                     label="End date"
                     value={endDate}
-                    onChange={handleEndDateChange}                    
+                    onChange={handleEndDateChange}
                     minDate={startDate}
                     KeyboardButtonProps={{
                       "aria-label": "change date",
